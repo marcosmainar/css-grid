@@ -4,6 +4,63 @@ html, body {
   margin: 0;
   padding: 0;
 }
+
 body {
   display: grid;
+
+  /* sequence of sizes (heights) for each of the 3 rows.
+    We can also name track borders and user those names for placement
+  */
+  grid-template-rows: 150px [nav-start] auto 100px [nav-end]; 
+
+   /* sequence of sizes (widths) for each of the 2 columns. 
+    Both columns will size to fit the screen but the content column
+    will always be 3 times as wide as the nav column */
+  grid-template-columns: [header-start] minmax(200px, 3fr) 9fr [header-end];
+
+  /* we can also name entire regions in our grid, giving each cell
+  a name. If two adjacent cells have the same name, 
+  they are going to be coalesced to the same area 
+  */
+  grid-template-areas: "header header"
+                      "nav    content"
+                      "nav    footer";
+}
+
+header {
+    background-color: yellow;
+
+    /* Start point and end point in columns: 
+        our header starts in the 1st column and ends
+        before the 3rd column. 
+        Can also use the names defined before for placement.
+     */
+    /*grid-column: 1 / 3; */
+
+    /* Using the names defined before */
+     /*grid-column: header-start / header-end;*/
+
+     /* Using grid region names */
+     grid-area: header;
+}
+
+nav {
+     background-color: red;
+
+     /* Start in the second row and span 2 rows */
+     /*grid-row: 2 / span 2;*/
+
+    /* Using the names defined before */
+     /*grid-row: nav-start / nav-end;*/
+
+     /* Using grid region names */
+     grid-area: nav;
+}
+
+main {
+     background-color: green;
+}
+
+footer {
+     background-color: cyan;
 }
